@@ -1,0 +1,56 @@
+{
+  "name": "@internet/dom",
+  "version": "0.0.2",
+  "description": "dom utilities",
+  "source": "index.js",
+  "main": "index.js",
+  "module": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "tape -r esm test/index.js | faucet",
+    "lint": "eslint index.js test/**",
+    "demo": "microbundle watch -i demo/demo.js -f umd -o demo --target browser & light-server -s demo -p 8080 -w demo/**/*",
+    "demo:deploy": "ncp docs demo/docs && ghp demo -f && rimraf demo/docs",
+    "docs": "rimraf docs && jsdoc -c .jsdoc.json",
+    "docs:serve": "light-server -s docs -p 8080 -w docs/**/*",
+    "prepublishOnly": "npm run lint && npm run test && npm run docs && npm run demo:deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interneeeeet/dom.git"
+  },
+  "keywords": [
+    "dom"
+  ],
+  "author": "pqml",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/interneeeeet/dom/issues"
+  },
+  "homepage": "https://github.com/interneeeeet/dom#readme",
+  "devDependencies": {
+    "docdash": "^0.4.0",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "esm": "^3.0.14",
+    "faucet": "^0.0.1",
+    "ghp": "^1.1.4",
+    "jsdoc": "^3.5.5",
+    "light-server": "^2.5.0",
+    "microbundle": "^0.4.4",
+    "ncp": "^2.0.0",
+    "raf": "^3.4.0",
+    "rimraf": "^2.6.2",
+    "tape": "^4.9.0",
+    "tape-promise": "^3.0.0"
+  },
+  "dependencies": {
+    "@internet/raf": "^0.1.1"
+  }
+}
