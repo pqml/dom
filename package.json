@@ -1,12 +1,13 @@
 {
   "name": "@internet/dom",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "dom utilities",
   "source": "index.js",
   "main": "index.js",
   "module": "index.js",
   "files": [
-    "index.js"
+    "index.js",
+    "lib"
   ],
   "scripts": {
     "test": "tape -r esm test/index.js | faucet",
