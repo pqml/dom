@@ -58,6 +58,6 @@ Full documentation available from https://pqml.github.io/dom/docs
 
 <br><br>
 
-<i>`hotmaterial` is a package of the [@internet](https://www.npmjs.com/org/internet) npm scope. </i>
+<i>`dom` is a package of the [@internet](https://www.npmjs.com/org/internet) npm scope. </i>
 
 _[@internet](https://www.npmjs.com/org/internet) is a collection of opinionated and interoperables front-end npm ES6 modules, with minimal external dependencies._
