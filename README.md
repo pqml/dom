@@ -1,8 +1,8 @@
 # DOM
 Dom utilities
 
-[→ Documentation](https://interneeeeet.github.io/dom/docs) |
-[→ Example](https://interneeeeet.github.io/dom)
+[→ Documentation](https://pqml.github.io/dom/docs) |
+[→ Example](https://pqml.github.io/dom)
 
 <br><br>
 
@@ -49,9 +49,15 @@ mutate(() => {
 <br>
 
 ## Documentation
-Full documentation available from https://interneeeeet.github.io/dom/docs
+Full documentation available from https://pqml.github.io/dom/docs
 
 <br>
 
 ## License
 [MIT.](LICENSE)
+
+<br><br>
+
+<i>`hotmaterial` is a package of the [@internet](https://www.npmjs.com/org/internet) npm scope. </i>
+
+_[@internet](https://www.npmjs.com/org/internet) is a collection of opinionated and interoperables front-end npm ES6 modules, with minimal external dependencies._

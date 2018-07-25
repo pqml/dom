@@ -1,6 +1,6 @@
 {
   "name": "@internet/dom",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "dom utilities",
   "source": "index.js",
   "main": "index.js",
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/interneeeeet/dom.git"
+    "url": "git+https://github.com/pqml/dom.git"
   },
   "keywords": [
     "dom"
@@ -28,9 +28,9 @@
   "author": "pqml",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/interneeeeet/dom/issues"
+    "url": "https://github.com/pqml/dom/issues"
   },
-  "homepage": "https://github.com/interneeeeet/dom#readme",
+  "homepage": "https://github.com/pqml/dom#readme",
   "devDependencies": {
     "docdash": "^0.4.0",
     "eslint": "^4.19.1",
