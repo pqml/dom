@@ -44,7 +44,29 @@ mutate(() => {
 })
 ```
 
-:warning: Default export does not contain batching methods
+<br>
+
+## JSX Support
+There is also a tiny jsx support. You can use `h` pragma or use `React.createElement`.
+It will directly generate a dom tree or an array of dom trees.
+
+- Diffing and state management will not be implemented
+- For the moment there is no vdom generated
+- Stateless components and callback refs are implemented
+- Class components with a render method will work but lifecycle methods are not supported.
+- Methods `cloneElement` / `mount` / `render` are unavailable.
+
+```js
+import { h } from '@internet/dom'
+// For react user, you can use: import { React } from '@internet/dom'
+
+function FrenchHello ({ name }) {
+  return <span>{`Bonjour ${name} !`}</span>
+}
+
+const el = <FrenchHello name="test"/>
+document.body.appendChild(el)
+```
 
 <br>
 
