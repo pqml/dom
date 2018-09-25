@@ -1,6 +1,6 @@
 import 'raf/polyfill'
 import test from 'tape-promise/tape'
-import * as dom from '..'
+import * as dom from '../lib'
 
 test('simple dom batch', async t => {
   const log = []

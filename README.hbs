@@ -1,0 +1,55 @@
+# DOM utilities
+[:books: **Documentation**](#api) | [:tada: **Example**](https://pqml.github.io/dom) | [:globe_with_meridians: **Internet modules**](https://www.npmjs.com/org/internet)
+
+- `el` function to create elements, with nesting support
+- `css` / `attr` / `data` / `classes` functions to modify an existing element
+- DOM batching
+- Basic jsx support
+
+
+<br>
+
+# Requirements
+- ES6 Modules support
+  - RequestAnimationFrame
+  - Promise object (only for Batching methods)
+  - Using a module bundler like Webpack, Rollup or Parcel
+  - [Native support from browser](https://caniuse.com/#feat=es6-module)
+  - From NodeJS with something like [esm](https://github.com/standard-things/esm)
+
+<br>
+
+# Installation
+```sh
+# using npm
+$ npm install --save @internet/dom
+
+# or using yarn
+$ yarn add @internet/dom
+```
+
+<br>
+
+# JSX Support
+The dom package contains a tiny jsx support. You can use `h` pragma or use `React.createElement`.
+It will directly generate a dom tree or an array of dom trees.
+
+- Diffing and state management will not be implemented
+- For the moment there is no vdom generated
+- Stateless components and callback refs are implemented
+- Class components with a render method will work but lifecycle methods are not supported.
+- Methods `cloneElement` / `mount` / `render` are unavailable.
+
+<br>
+
+<a name="api"></a>
+# API
+
+<a name="module_dom"></a>
+{{#module name="dom"}}
+{{>body~}}
+#### API
+{{>member-index~}}
+<br>
+{{>members~}}
+{{/module}}

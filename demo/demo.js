@@ -1,4 +1,4 @@
-import { el, h } from '../index' // eslint-disable-line
+import { el, h } from '../lib' // eslint-disable-line
 
 var pre
 el(
