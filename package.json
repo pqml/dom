@@ -1,6 +1,6 @@
 {
   "name": "@internet/dom",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "dom utilities",
   "source": "lib/index.js",
   "main": "lib/index.js",
