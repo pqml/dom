@@ -1,21 +1,33 @@
 # DOM utilities
 [:books: **Documentation**](#api) | [:tada: **Example**](https://pqml.github.io/dom) | [:globe_with_meridians: **Internet modules**](https://www.npmjs.com/org/internet)
 
-- `el` function to create elements, with nesting support
-- `css` / `attr` / `data` / `classes` functions to modify an existing element
-- DOM batching
-- Basic jsx support
+- React-like library to build DOM, without `setState` and patching.
+- Own JSX implementation using `h` pragma.
+- `render` method to render and mount jsx.
+- `cloneElement` to clone a virtual node with new props or new children
+- Class `Component` with react-like `render` and lifecycle methods.
+- `attach` method to instanciate a Component using an existing DOM Node.
+- [Callback refs](https://reactjs.org/docs/refs-and-the-dom.html#callback-refs) support.
+- DOM batching with `measure` and `mutate` methods
 
+<br>
+
+# :warning: Warnings
+- This is not a viable React alternative, use [preact](https://github.com/developit/preact) for this purpose.
+- `render` have different arguments than the preact / React one
+- The "no-patching" approach is cool to add components on top of already existing DOM without worrying about state management
+- Not carring about state management also means it's super easy to have leaks and bad lifecycle behaviour, so don't rely too much on this lib
 
 <br>
 
 # Requirements
 - ES6 Modules support
-  - RequestAnimationFrame
-  - Promise object (only for Batching methods)
   - Using a module bundler like Webpack, Rollup or Parcel
   - [Native support from browser](https://caniuse.com/#feat=es6-module)
   - From NodeJS with something like [esm](https://github.com/standard-things/esm)
+- [Promise (No IE support)](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Promise)
+- [Object.assign (No IE support)](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Object/assign)
+- [HTMLElement.dataset (IE >= 11)](https://developer.mozilla.org/fr/docs/Web/API/HTMLElement/dataset)
 
 <br>
 
@@ -30,26 +42,37 @@ $ yarn add @internet/dom
 
 <br>
 
-# JSX Support
-The dom package contains a tiny jsx support. You can use `h` pragma or use `React.createElement`.
-It will directly generate a dom tree or an array of dom trees.
-
-- Diffing and state management will not be implemented
-- For the moment there is no vdom generated
-- Stateless components and callback refs are implemented
-- Class components with a render method will work but lifecycle methods are not supported.
-- Methods `cloneElement` / `mount` / `render` are unavailable.
-
-<br>
-
 <a name="api"></a>
 # API
 
-<a name="module_dom"></a>
-{{#module name="dom"}}
+<a name="h"></a>
+## `h([tag|Component], [props={}], ...children)`
+{{#globals name="h"}}
 {{>body~}}
-#### API
-{{>member-index~}}
+{{/globals}}
+
 <br>
-{{>members~}}
-{{/module}}
+
+<a name="render"></a>
+## `render(VNode, mountTo, [context=null])`
+{{#globals name="render"}}
+{{>body~}}
+{{/globals}}
+
+<br>
+
+<a name="attach"></a>
+## `attach(DOMElement, Component, [props={}])`
+{{#globals name="attach"}}
+{{>body~}}
+{{/globals}}
+
+<br>
+
+<a name="cloneElement"></a>
+## `cloneElement(VNode, [newProps={}], [newChildren])`
+{{#globals name="cloneElement"}}
+{{>body~}}
+{{/globals}}
+
+<br>
