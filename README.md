@@ -16,12 +16,12 @@
 - This is **not** a React alternative, use [preact](https://github.com/developit/preact) for this purpose.
 
 - You can render "real" HTML Element inside virtual dom (using `render` or `component.render`)
-  - It's the one of the reason why there isn't patching
+  - It's the one of the reasons why there isn't patching
   - It's a great feature to add a Component-oriented architecture on top of an already existing html page (like rendered from PHP)
-  - It also means **the virtual dom is absolutely not a source of thruth** :warning::warning:
-  - It can be super easy to have leaks and bad lifecycle behaviour, so don't rely too much on this lib
+  - It also means that **the virtual dom is absolutely not a source of thruth** :warning::warning:
+  - It can be super easy to have leaks and a bad lifecycle behaviour, so don't rely too much on this lib
 
-- There is no event management for now. Use `addEventListener` / `removeEventListener` with lifecycle events to be sure of what you are doing.
+- There is no event management for now. Use `addEventListener` / `removeEventListener` with lifecycle methods to be sure of what you are doing.
 - `render` have different arguments than the preact / React one.
 - `component.render` is used to render portions of jsx inside it, as child of the `component`
   - the initial rendering of the component is made via the `component.template` method instead
@@ -98,10 +98,10 @@ render(node, document.body)
 ## :movie_camera: `render(VNode, parent)`
 > Renders a virtual node and mount-it into a `parent` Element
 
-> ** :warning: `render` always dispatch lifecycle events. Even if you don't pass a parent as 2nd argument, all componentDidMount methods and callback refs will be called. Be carreful!**
+> :warning: `render` always dispatch lifecycle events. Even if you don't pass a parent as 2nd argument, all componentDidMount methods and callback refs will be called. Be carreful!
 
-> ** :warning: If you render a virtual node inside an already mounted component,
-use its [component.render method](#Component+render) instead. **
+> :warning: If you render a virtual node inside an already mounted component,
+use its [component.render method](#Component+render) instead.
 Otherwise, the rendered subcomponents and callback refs will not be register as "childs" of the parent component.
 This can lead to bad lifecycle dispatching if you destroy the parent for instance.
 
@@ -139,7 +139,7 @@ render(<div>Some text</div>, div => {
 ```js
 import { h, Component, render } from '@internet/raf'
 
-class App () {
+class App extends Component () {
    template () {
      return (
        <div>
@@ -333,7 +333,7 @@ render(<List />, document.body)
 
 #### component.destroy()
 Destroy the component and its children components.
- - This also remove component props and de-reference the component from its parent.
+ - This also removes component props and de-reference the component from its parent.
  - Callback refs inside the component tree will be called with `null` as first argument
  - Set component.mounted to false
 
@@ -343,7 +343,7 @@ Destroy the component and its children components.
 ```js
 import { h, Component, render } from '@internet/dom'
 
-class SelfDestructButton extends Component () {
+class SelfDestructButton extends Component {
   template() {
      return <button>Destroy me</button>
   }
@@ -367,7 +367,7 @@ render(<SelfDestructButton />, document.body)
 
 #### component.props : <code>object</code>
 > Contains all component properties and children. <br>
-> Do not modify directly, but recreate a new component using cloneElement instead
+> Do not modify it directly, but recreate a new component using `cloneElement` instead
 
 **Kind**: instance property of [<code>Component</code>](#Component)  
 **Category**: Properties  

@@ -16,12 +16,12 @@
 - This is **not** a React alternative, use [preact](https://github.com/developit/preact) for this purpose.
 
 - You can render "real" HTML Element inside virtual dom (using `render` or `component.render`)
-  - It's the one of the reason why there isn't patching
+  - It's the one of the reasons why there isn't patching
   - It's a great feature to add a Component-oriented architecture on top of an already existing html page (like rendered from PHP)
-  - It also means **the virtual dom is absolutely not a source of thruth** :warning::warning:
-  - It can be super easy to have leaks and bad lifecycle behaviour, so don't rely too much on this lib
+  - It also means that **the virtual dom is absolutely not a source of thruth** :warning::warning:
+  - It can be super easy to have leaks and a bad lifecycle behaviour, so don't rely too much on this lib
 
-- There is no event management for now. Use `addEventListener` / `removeEventListener` with lifecycle events to be sure of what you are doing.
+- There is no event management for now. Use `addEventListener` / `removeEventListener` with lifecycle methods to be sure of what you are doing.
 - `render` have different arguments than the preact / React one.
 - `component.render` is used to render portions of jsx inside it, as child of the `component`
   - the initial rendering of the component is made via the `component.template` method instead
@@ -87,7 +87,7 @@ import { h, render, Component, cloneElement, addRef } from '@internet/dom'
 ```js
 import { h, Component, render } from '@internet/raf'
 
-class App () {
+class App extends Component () {
    template () {
      return (
        <div>

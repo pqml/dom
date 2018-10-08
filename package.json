@@ -1,7 +1,7 @@
 {
   "name": "@internet/dom",
-  "version": "1.0.1",
-  "description": "dom utilities",
+  "version": "1.0.2",
+  "description": "Experimental React-like library to build DOM",
   "source": "lib/index.js",
   "main": "lib/index.js",
   "module": "lib/index.js",
