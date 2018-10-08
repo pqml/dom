@@ -1,6 +1,6 @@
 {
   "name": "@internet/dom",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "dom utilities",
   "source": "lib/index.js",
   "main": "lib/index.js",
@@ -22,7 +22,7 @@
     "prepublishOnly": "npm run lint && npm run test && npm run docs && npm run demo:deploy"
   },
   "devDependencies": {
-    "@internet/eslint-config": "0.0.1",
+    "@internet/eslint-config": "0.0.2",
     "esm": "^3.0.84",
     "ghp": "^1.3.1",
     "jsdoc-to-markdown": "^4.0.1",
