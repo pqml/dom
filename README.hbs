@@ -1,22 +1,32 @@
-# DOM utilities
+# DOM Library
 [:books: **Documentation**](#api) | [:tada: **Example**](https://pqml.github.io/dom) | [:globe_with_meridians: **Internet modules**](https://www.npmjs.com/org/internet)
 
-- React-like library to build DOM, without `setState` and patching.
+- :warning: **Experimental** React-like library to build DOM, without `setState` and patching.
 - Own JSX implementation using `h` pragma.
-- `render` method to render and mount jsx.
+- `render` method to render and mount jsx
 - `cloneElement` to clone a virtual node with new props or new children
-- Class `Component` with react-like `render` and lifecycle methods.
-- `attach` method to instanciate a Component using an existing DOM Node.
+- Class `Component` with react-like lifecycle methods.
 - [Callback refs](https://reactjs.org/docs/refs-and-the-dom.html#callback-refs) support.
-- DOM batching with `measure` and `mutate` methods
+- **You can also render "real" HTML Elements inside virtual dom**
+  - This is useful to add a Component-oriented architecture on top of an already existing html page (like rendered from PHP)
 
 <br>
 
 # :warning: Warnings
-- This is not a viable React alternative, use [preact](https://github.com/developit/preact) for this purpose.
-- `render` have different arguments than the preact / React one
-- The "no-patching" approach is cool to add components on top of already existing DOM without worrying about state management
-- Not carring about state management also means it's super easy to have leaks and bad lifecycle behaviour, so don't rely too much on this lib
+- This is **not** a React alternative, use [preact](https://github.com/developit/preact) for this purpose.
+
+- You can render "real" HTML Element inside virtual dom (using `render` or `component.render`)
+  - It's the one of the reason why there isn't patching
+  - It's a great feature to add a Component-oriented architecture on top of an already existing html page (like rendered from PHP)
+  - It also means **the virtual dom is absolutely not a source of thruth** :warning::warning:
+  - It can be super easy to have leaks and bad lifecycle behaviour, so don't rely too much on this lib
+
+- There is no event management for now. Use `addEventListener` / `removeEventListener` with lifecycle events to be sure of what you are doing.
+- `render` have different arguments than the preact / React one.
+- `component.render` is used to render portions of jsx inside it, as child of the `component`
+  - the initial rendering of the component is made via the `component.template` method instead
+
+
 
 <br>
 
@@ -25,9 +35,7 @@
   - Using a module bundler like Webpack, Rollup or Parcel
   - [Native support from browser](https://caniuse.com/#feat=es6-module)
   - From NodeJS with something like [esm](https://github.com/standard-things/esm)
-- [Promise (No IE support)](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Promise)
 - [Object.assign (No IE support)](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Object/assign)
-- [HTMLElement.dataset (IE >= 11)](https://developer.mozilla.org/fr/docs/Web/API/HTMLElement/dataset)
 
 <br>
 
@@ -45,34 +53,78 @@ $ yarn add @internet/dom
 <a name="api"></a>
 # API
 
+```js
+import { h, render, Component, cloneElement, addRef } from '@internet/dom'
+```
+
+- [:pencil: **h()**](#h): _Creates a VNode (usually used through JSX)_
+- [:movie_camera: **render()**](#render): _Renders a virtual node and mount-it into a `parent` Element_
+- [:orange_book: **Component Class**](#Component): _Base Component class with lifecycle and rendering methods_
+- [:floppy_disk: **cloneElement()**](#cloneElement): _Clones the given virtual node, optionally replacing its props / children_
+- [:mag: **addRef()**](#addRef): _Quick util to add callback refs to jsx_
+
+<br><br>
+
 <a name="h"></a>
-## `h([tag|Component], [props={}], ...children)`
+## :pencil: `h([tag|Component], [props={}], ...children)`
 {{#globals name="h"}}
 {{>body~}}
 {{/globals}}
 
-<br>
+<br><br>
 
 <a name="render"></a>
-## `render(VNode, mountTo, [context=null])`
+## :movie_camera: `render(VNode, parent)`
 {{#globals name="render"}}
 {{>body~}}
 {{/globals}}
 
-<br>
+<br><br>
 
-<a name="attach"></a>
-## `attach(DOMElement, Component, [props={}])`
-{{#globals name="attach"}}
-{{>body~}}
+<a name="Component"></a>
+## :orange_book: `Component` class
+#### Example
+```js
+import { h, Component, render } from '@internet/raf'
+
+class App () {
+   template () {
+     return (
+       <div>
+         <p>My first app</p>
+       </div>
+     )
+   }
+
+   componentDidMount () {
+     console.log('App is mounted')
+     console.log('HTMLElement of the App: ', this.base)
+   }
+}
+
+// Mount a new instance of App component into document.body
+// Will call componentWillMount, template and componentDidMount lifecycle events
+render(<App />, document.body)
+```
+{{#globals name="Component"}}
+#### Component API
+{{>member-index~}}
+<br>
+{{>members~}}
 {{/globals}}
 
-<br>
+<br><br>
 
 <a name="cloneElement"></a>
-## `cloneElement(VNode, [newProps={}], [newChildren])`
+## :floppy_disk: `cloneElement(VNode, [newProps={}], [newChildren])`
 {{#globals name="cloneElement"}}
 {{>body~}}
 {{/globals}}
 
-<br>
+<br><br>
+
+<a name="addRef"></a>
+## :mag: `addRef(obj, refName)`
+{{#globals name="addRef"}}
+{{>body~}}
+{{/globals}}

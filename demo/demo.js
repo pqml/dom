@@ -1,46 +1,66 @@
-import { h, render, Component } from '../lib' // eslint-disable-line
+import { h, render, Component, addRef } from '../lib' // eslint-disable-line
 
-const noop = () => {}
-const refs = {}
-const ref = k => r => { refs[k] = r; console.log(r ? 'Reference ' + k : 'De-reference ' + k) }
+function RemoveButton ({ children, ref }) {
+  return (
+    <button className='btn' ref={ref}>Remove: {children}</button>
+  )
+}
+
+class Counter extends Component {
+  template () {
+    return <span />
+  }
+  increment () {
+    this.base.textContent = ' Alive since ' + this.count++ + 'sec'
+    console.log('increment')
+  }
+  componentDidMount () {
+    this.count = 0
+    this.increment = this.increment.bind(this)
+    this.increment()
+    this.timer = window.setInterval(this.increment, 1000)
+  }
+
+  componentWillUnmount () {
+    clearInterval(this.timer)
+  }
+}
 
 class Item extends Component {
-  render ({ count }) {
+  template ({ count }) {
     return (
       <li>
-        <button ref={r => { this.addButton = r }}>Add list</button>
-        <button ref={r => { this.removeButton = r }}>Remove item {count}</button>
+        <button className='btn primary' ref={addRef(this, 'addButton')}>Add list</button>
+        <RemoveButton ref={addRef(this, 'removeButton')}>item {count}</RemoveButton>
+        <Counter />
       </li>
     )
   }
 
-  remove () {
-    this.destroy()
-  }
-
-  add () {
-    render(<List />, el => this.base.appendChild(el), this)
+  addList () {
+    this.render(<List />, this.base)
   }
 
   componentDidMount () {
-    this.remove = this.remove.bind(this)
-    this.add = this.add.bind(this)
-    this.removeButton.addEventListener('click', this.remove)
-    this.addButton.addEventListener('click', this.add)
+    this.destroy = this.destroy.bind(this)
+    this.addList = this.addList.bind(this)
+    this.removeButton.addEventListener('click', this.destroy)
+    this.addButton.addEventListener('click', this.addList)
   }
 
   componentWillUnmount () {
-    this.removeButton.removeEventListener('click', this.remove)
-    this.addButton.removeEventListener('click', this.add)
+    console.log('remove', this.props.count)
+    this.removeButton.removeEventListener('click', this.destroy)
+    this.addButton.removeEventListener('click', this.addList)
   }
 }
 
 class List extends Component {
-  render ({ children }) {
+  template () {
     return (
-      <div>
-        <ul ref={e => { this.ul = e }} />
-        <button ref={e => { this.button = e }}>Add item</button>
+      <div style='border-left: 2px solid black; padding-left: 10px'>
+        <ul ref={addRef(this, 'ul')} />
+        <button className='btn primary' ref={addRef(this, 'button')}>Add item</button>
       </div>
     )
   }
@@ -52,12 +72,7 @@ class List extends Component {
   }
 
   addItem () {
-    console.log(this._collector)
-    render(
-      <Item count={++this.count} ref={ref(`Item ${this.count}`)} />,
-      el => this.ul.appendChild(el),
-      this
-    )
+    this.render(<Item count={++this.count} />, this.ul)
   }
 
   componentWillUnmount () {
@@ -65,6 +80,16 @@ class List extends Component {
   }
 }
 
-const result = render(<List name='0 - ' />, document.body)
+class App extends Component {
+  template () {
+    return document.querySelector('main')
+  }
 
-console.log(result)
+  componentDidMount () {
+    this.base.style.paddingTop = '20px'
+    this.render(<List />, this.base)
+    this.base.addEventListener('click', () => { console.log(this) })
+  }
+}
+
+render(<App />)
