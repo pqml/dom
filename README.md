@@ -35,7 +35,6 @@
   - Using a module bundler like Webpack, Rollup or Parcel
   - [Native support from browser](https://caniuse.com/#feat=es6-module)
   - From NodeJS with something like [esm](https://github.com/standard-things/esm)
-- [Object.assign (No IE support)](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Object/assign)
 
 <br>
 
