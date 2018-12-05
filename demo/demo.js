@@ -14,3 +14,11 @@ render([
     playsinline
   />
 ], document.body)
+
+let div
+render([
+  <h4>Data attributes support:</h4>,
+  <div class='datatest' ref={el => { div = el }} data-a='data is' data-b='working' />
+], document.body)
+
+div.textContent = div.dataset.a
